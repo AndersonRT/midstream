@@ -1,0 +1,12 @@
+./pkgs/Robinhood-1.0.1.tar.gz
+python-dateutil
+dash
+dash-core-components
+dash-html-components
+dash-renderer
+colorlover
+numpy
+pandas
+redis
+gunicorn>=19.7.1
+

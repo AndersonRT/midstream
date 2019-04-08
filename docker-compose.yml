@@ -20,6 +20,7 @@ services:
       - "8000:8000"
     depends_on:
       - redis
+      - mongodb
     command: gunicorn -w 1 -b :8000 app:server
 
   nginx:
@@ -31,7 +32,31 @@ services:
     depends_on:
       - dash_app
 
+  mongodb:
+    image: mongo:latest
+    container_name: "mongodb"
+    volumes:
+      - db-data:/data/db
+      - mongo-config:/data/configdb
+    ports:
+      - 27017:27017
   
+  rabbitmq:
+    #image: rabbitmq
+    build: ./rabbitmq
+    ports:
+      - 15672:15672
+    #command: rabbitmq-server
+    #expose:
+    #  - 5672
+    #  - 15672
+    #healthcheck:
+    #  test: [ "CMD", "nc", "-z", "localhost", "5672" ]
+    #  interval: 5s
+    #  timeout: 15s
+    #  retries: 1
+
 volumes:
   redis:
-
+  db-data:
+  mongo-config:

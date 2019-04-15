@@ -43,13 +43,13 @@ while next_instruments_query:
         results.extend(result)
         time.sleep(2.5)
 
+    if results:
+        df=pd.DataFrame(results)
+        df = df[['ts','symbol','popularity']]
 
-    df=pd.DataFrame(results)
-    df = df[['ts','symbol','popularity']]
-
-    if not os.path.isfile('./data/results.csv'):
-        df.to_csv('./data/results.csv', header=True,index=False)
-    else: # else it exists so append without writing the header
-        df.to_csv('./data/results.csv', mode='a', header=False,index=False)
+        if not os.path.isfile('./data/results.csv'):
+            df.to_csv('./data/results.csv', header=True,index=False)
+        else: # else it exists so append without writing the header
+            df.to_csv('./data/results.csv', mode='a', header=False,index=False)
 
 

@@ -1,0 +1,8 @@
+#!/bin/bash
+mkdir -p data
+source .secret
+
+echo $robinhood_username
+docker build -t scraper .
+docker run -ti -v "$(pwd)"/data:/usr/src/app/data --env-file ./.secret scraper
+#docker exec -it scraper2 /bin/bash
